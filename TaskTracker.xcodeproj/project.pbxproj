@@ -30,6 +30,8 @@
 		E980FE8229723A9300EB1EAC /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980FE8129723A9300EB1EAC /* Task.swift */; };
 		E980FE8629723EF200EB1EAC /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980FE8529723EF200EB1EAC /* TaskViewModel.swift */; };
 		E980FE88297243AD00EB1EAC /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980FE87297243AD00EB1EAC /* NewTaskViewController.swift */; };
+		E993AA44297498FC00D9118B /* TaskTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993AA42297498FC00D9118B /* TaskTypeCollectionViewCell.swift */; };
+		E993AA45297498FC00D9118B /* TaskTypeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E993AA43297498FC00D9118B /* TaskTypeCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		E980FE8129723A9300EB1EAC /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E980FE8529723EF200EB1EAC /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		E980FE87297243AD00EB1EAC /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		E993AA42297498FC00D9118B /* TaskTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		E993AA43297498FC00D9118B /* TaskTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTypeCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,8 @@
 		E980FE8329723ECF00EB1EAC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E993AA42297498FC00D9118B /* TaskTypeCollectionViewCell.swift */,
+				E993AA43297498FC00D9118B /* TaskTypeCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -289,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E980FE7629722F3500EB1EAC /* Montserrat-MediumItalic.ttf in Resources */,
+				E993AA45297498FC00D9118B /* TaskTypeCollectionViewCell.xib in Resources */,
 				E980FE7729722F3500EB1EAC /* Montserrat-SemiBold.ttf in Resources */,
 				E980FE7429722F3500EB1EAC /* Montserrat-BoldItalic.ttf in Resources */,
 				E980FE5429722CF500EB1EAC /* LaunchScreen.storyboard in Resources */,
@@ -316,6 +323,7 @@
 				E980FE88297243AD00EB1EAC /* NewTaskViewController.swift in Sources */,
 				E980FE8629723EF200EB1EAC /* TaskViewModel.swift in Sources */,
 				E980FE7A2972307C00EB1EAC /* ColorExtensions.swift in Sources */,
+				E993AA44297498FC00D9118B /* TaskTypeCollectionViewCell.swift in Sources */,
 				E980FE4529722CF400EB1EAC /* AppDelegate.swift in Sources */,
 				E980FE4729722CF400EB1EAC /* SceneDelegate.swift in Sources */,
 				E980FE4F29722CF400EB1EAC /* TaskTracker.xcdatamodeld in Sources */,
