@@ -30,11 +30,34 @@ class NewTaskViewController: UIViewController {
     // MARK: -  lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.taskViewModel = TaskViewModel()
+        taskViewModel = TaskViewModel()
         
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.register(UINib(nibName: "TaskTypeCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: TaskTypeCollectionViewCell.description())
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "TaskTypeCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: TaskTypeCollectionViewCell.description())
+        
+        startButton.layer.cornerRadius = 12
+        nameDescriptionContainerView.layer.cornerRadius = 12
+        
+        [self.hourTextField, self.minutesTextField, self.secondTextField].forEach {
+            $0?.attributedPlaceholder = NSAttributedString(string: "00",
+                                                           attributes: [NSAttributedString.Key.font: UIFont(name: "Code-Pro-Bold-LC", size: 55)!,
+                                                           NSAttributedString.Key.foregroundColor: UIColor.black])
+            $0?.delegate = self
+            $0?.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
+        }
+        
+        taskNameTextField.attributedPlaceholder = NSAttributedString(string: "Task Name",
+                                                                     attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Medium", size: 16.5)!,
+                                                                    NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.55)])
+        
+        taskNameTextField.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
+        
+        taskDescriptionTextField.attributedPlaceholder = NSAttributedString(string: "Short Description",
+                                                                            attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Medium", size: 16.5)!,
+                                                                           NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.55)])
+        taskDescriptionTextField.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
+        
     }
     
     // MARK: - Outlets & obj functions
@@ -46,9 +69,37 @@ class NewTaskViewController: UIViewController {
         
     }
     
+    @objc func textFieldInputChanged(_ textField: UITextField) {
+        
+        guard let text = textField.text else { return }
+        
+        if (textField == taskNameTextField) {
+            taskViewModel.setTaskName(to: text)
+        } else if (textField == taskDescriptionTextField) {
+            taskViewModel.setTaskDescription(to: text)
+        } else if (textField == hourTextField) {
+            
+        } else if (textField == minutesTextField) {
+            
+        } else {
+            
+        }
+    }
     //MARK: - functions
     
 }
+
+extension NewTaskViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLenth = 2
+        let currentText: NSString = (textField.text ?? "" ) as NSString
+        let newString: NSString = currentText.replacingCharacters(in: range, with: string) as NSString
+        
+        return newString.length <= maxLenth
+    }
+}
+
 
 
 extension NewTaskViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
