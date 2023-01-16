@@ -48,13 +48,13 @@ class NewTaskViewController: UIViewController {
         }
         
         taskNameTextField.attributedPlaceholder = NSAttributedString(string: "Task Name",
-                                                                     attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Medium", size: 16.5)!,
+                                                                     attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Medium", size: 16)!,
                                                                     NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.55)])
         
         taskNameTextField.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
         
         taskDescriptionTextField.attributedPlaceholder = NSAttributedString(string: "Short Description",
-                                                                            attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Medium", size: 16.5)!,
+                                                                            attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Medium", size: 16)!,
                                                                            NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.55)])
         taskDescriptionTextField.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
         
@@ -85,6 +85,11 @@ class NewTaskViewController: UIViewController {
             
         }
     }
+    
+    @objc func viewTapped(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     //MARK: - functions
     
 }
@@ -123,10 +128,9 @@ extension NewTaskViewController: UICollectionViewDelegateFlowLayout, UICollectio
         return cell
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.taskViewModel.setSelectedIndex(to: indexPath.item)
+        self.collectionView.reloadData()
     }
     
     

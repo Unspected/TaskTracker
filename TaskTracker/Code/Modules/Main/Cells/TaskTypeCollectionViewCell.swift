@@ -31,7 +31,6 @@ class TaskTypeCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        self.prepareForReuse()
         self.imageView.image = nil
         
     }
