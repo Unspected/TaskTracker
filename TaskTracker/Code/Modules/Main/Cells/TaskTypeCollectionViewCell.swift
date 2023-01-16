@@ -47,10 +47,10 @@ class TaskTypeCollectionViewCell: UICollectionViewCell {
             typeName.textColor = UIColor(hex: "006666")
             imageView.tintColor = UIColor.white
             imageView.image = UIImage(systemName: taskType.symbolName,
-                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 26, weight: .medium))
+                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 24, weight: .medium))
         } else {
             imageView.image = UIImage(systemName: taskType.symbolName,
-                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 24, weight: .regular))
+                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular))
             reset()
         }
     }

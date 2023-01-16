@@ -58,6 +58,23 @@ class NewTaskViewController: UIViewController {
                                                                            NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.55)])
         taskDescriptionTextField.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+        taskViewModel.getHours().bind { hours in
+            self.hourTextField.text = hours.appendZeroes()
+        }
+        
+        taskViewModel.getMinutes().bind { minutes in
+            self.minutesTextField.text = minutes.appendZeroes()
+        }
+        
+        taskViewModel.getSeconds().bind { seconds in
+            self.secondTextField.text = seconds.appendZeroes()
+        }
+        
+    
     }
     
     // MARK: - Outlets & obj functions
@@ -74,14 +91,27 @@ class NewTaskViewController: UIViewController {
         guard let text = textField.text else { return }
         
         if (textField == taskNameTextField) {
+            
             taskViewModel.setTaskName(to: text)
+            
         } else if (textField == taskDescriptionTextField) {
+            
             taskViewModel.setTaskDescription(to: text)
+            
         } else if (textField == hourTextField) {
+            
+            guard let hours = Int(text) else { return }
+            taskViewModel.setHours(to: hours)
             
         } else if (textField == minutesTextField) {
             
+            guard let minutes = Int(text) else { return }
+            taskViewModel.setMinutes(to: minutes)
+            
         } else {
+            
+            guard let seconds = Int(text) else { return }
+            taskViewModel.setSeconds(to: seconds)
             
         }
     }
@@ -100,6 +130,14 @@ extension NewTaskViewController: UITextFieldDelegate {
         let maxLenth = 2
         let currentText: NSString = (textField.text ?? "" ) as NSString
         let newString: NSString = currentText.replacingCharacters(in: range, with: string) as NSString
+        
+        guard let text = textField.text else { return false }
+        
+        if (text.count == 2 && text.starts(with: "0")) {
+            textField.text?.removeFirst()
+            textField.text? += string
+            self.textFieldInputChanged(textField)
+        }
         
         return newString.length <= maxLenth
     }
@@ -130,7 +168,7 @@ extension NewTaskViewController: UICollectionViewDelegateFlowLayout, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.taskViewModel.setSelectedIndex(to: indexPath.item)
-        self.collectionView.reloadData()
+        self.collectionView.reloadSections(IndexSet(0..<1))
     }
     
     

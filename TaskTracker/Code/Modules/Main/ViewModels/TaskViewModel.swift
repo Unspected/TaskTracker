@@ -61,5 +61,29 @@ class TaskViewModel {
         return self.taskType
     }
     
+    func setHours(to value: Int) {
+        hours.value = value
+    }
+    
+    func setMinutes(to value: Int) {
+        minutes.value = value
+    }
+    
+    func setSeconds(to value: Int) {
+        seconds.value = value
+    }
+    
+    func getHours() -> Box<Int> {
+        return self.hours
+    }
+    
+    func getMinutes() -> Box<Int> {
+        return self.minutes
+    }
+    
+    func getSeconds() -> Box<Int> {
+        return self.seconds
+    }
+    
     
 }
