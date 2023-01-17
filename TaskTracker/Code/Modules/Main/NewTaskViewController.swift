@@ -87,6 +87,7 @@ class NewTaskViewController: UIViewController {
     @IBAction func startButtonPressed(_ sender: UIButton) {
         guard let timerVC = self.storyboard?.instantiateViewController(withIdentifier: TimerViewController.description()) as? TimerViewController else { return }
         taskViewModel.computeSeconds()
+        timerVC.taskViewModel = taskViewModel
         self.present(timerVC, animated: true)
     }
     
