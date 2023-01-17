@@ -24,6 +24,6 @@ class TimerViewController: UIViewController {
     
     //MARK: - functions
     override class func description() -> String {
-        return "TimeViewController"
+        return "TimerViewController"
     }
 }

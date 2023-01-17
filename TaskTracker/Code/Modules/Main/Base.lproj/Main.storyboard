@@ -423,16 +423,17 @@
                                     <constraint firstItem="qVL-ot-dFn" firstAttribute="top" secondItem="Qwj-6G-W6O" secondAttribute="top" id="soy-ah-80f"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fj-Mx-zQr">
-                                <rect key="frame" x="31" y="765" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description for the task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fj-Mx-zQr">
+                                <rect key="frame" x="24" y="752" width="321" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zIZ-Cf-gie"/>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.70196078431372544" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="8fj-Mx-zQr" firstAttribute="leading" secondItem="zIZ-Cf-gie" secondAttribute="leading" constant="24" id="3au-Np-SIJ"/>
                             <constraint firstItem="038-kx-Njl" firstAttribute="height" secondItem="V3s-MW-TEw" secondAttribute="height" multiplier="0.385" id="6qa-wD-2cV"/>
                             <constraint firstItem="Qwj-6G-W6O" firstAttribute="top" secondItem="038-kx-Njl" secondAttribute="bottom" constant="70" id="Emd-gk-gbF"/>
                             <constraint firstItem="xb2-CZ-icT" firstAttribute="centerX" secondItem="V3s-MW-TEw" secondAttribute="centerX" constant="-72" id="GBd-8w-Vtq"/>
@@ -450,6 +451,7 @@
                             <constraint firstItem="ASW-tc-ttY" firstAttribute="centerY" secondItem="G4l-ei-jhb" secondAttribute="centerY" id="pOj-Kd-maQ"/>
                             <constraint firstItem="xb2-CZ-icT" firstAttribute="top" secondItem="038-kx-Njl" secondAttribute="bottom" constant="70" id="rDj-ya-Y8W"/>
                             <constraint firstItem="zIZ-Cf-gie" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ASW-tc-ttY" secondAttribute="trailing" symbolic="YES" id="tfp-rI-U7h"/>
+                            <constraint firstItem="zIZ-Cf-gie" firstAttribute="trailing" secondItem="8fj-Mx-zQr" secondAttribute="trailing" constant="48" id="ugY-gm-JXl"/>
                             <constraint firstItem="ASW-tc-ttY" firstAttribute="leading" secondItem="G4l-ei-jhb" secondAttribute="trailing" constant="26" id="vR3-h9-Rrn"/>
                             <constraint firstItem="Qwj-6G-W6O" firstAttribute="centerX" secondItem="V3s-MW-TEw" secondAttribute="centerX" constant="72" id="xmW-qi-OKX"/>
                         </constraints>

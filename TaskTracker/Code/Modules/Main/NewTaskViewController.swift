@@ -85,7 +85,9 @@ class NewTaskViewController: UIViewController {
     
     // MARK: - Outlets & obj functions
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        
+        guard let timerVC = self.storyboard?.instantiateViewController(withIdentifier: TimerViewController.description()) as? TimerViewController else { return }
+        taskViewModel.computeSeconds()
+        self.present(timerVC, animated: true)
     }
     
     @IBAction func multiplayButtonPressed(_ sender: UIButton) {
