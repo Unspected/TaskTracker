@@ -24,8 +24,10 @@ class NewTaskViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var newTaskTopConstraint: NSLayoutConstraint!
     //MARK: - variables
-    var taskViewModel: TaskViewModel!
+    private var taskViewModel: TaskViewModel!
+    private var keyboardOpened = false
     
     // MARK: -  lifecycle
     override func viewDidLoad() {
@@ -58,6 +60,8 @@ class NewTaskViewController: UIViewController {
                                                                            NSAttributedString.Key.foregroundColor: UIColor.black.withAlphaComponent(0.55)])
         taskDescriptionTextField.addTarget(self, action: #selector(textFieldInputChanged(_:)), for: .editingChanged)
         
+        self.disableButton()
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(_:)))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -74,6 +78,8 @@ class NewTaskViewController: UIViewController {
             self.secondTextField.text = seconds.appendZeroes()
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     
     }
     
@@ -107,20 +113,65 @@ class NewTaskViewController: UIViewController {
             
             guard let minutes = Int(text) else { return }
             taskViewModel.setMinutes(to: minutes)
-            
         } else {
-            
             guard let seconds = Int(text) else { return }
             taskViewModel.setSeconds(to: seconds)
-            
         }
+        checkButtonStatus()
     }
     
     @objc func viewTapped(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if !Constants.hasToNotch, !keyboardOpened {
+            keyboardOpened.toggle()
+            newTaskTopConstraint.constant -= self.view.frame.height * 0.2
+            view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyBoardWillHide(_ notifcation: Notification) {
+        keyboardOpened = false
+        newTaskTopConstraint.constant = 20
+    }
+    
     //MARK: - functions
+    override class func description() -> String {
+        return "NewTaskViewController"
+    }
+    
+    func enableButton() {
+        if startButton.isUserInteractionEnabled == false {
+            
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
+                self.startButton.layer.opacity = 1
+            } completion: { _ in
+                self.startButton.isUserInteractionEnabled.toggle()
+            }
+        }
+    }
+    
+    func disableButton() {
+        if startButton.isUserInteractionEnabled {
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
+                self.startButton.layer.opacity = 0.25
+            } completion: { _ in
+                self.startButton.isUserInteractionEnabled.toggle()
+            }
+        }
+    }
+    
+    func checkButtonStatus() {
+        if taskViewModel.isTaskValid() {
+            // enable button
+            enableButton()
+        } else {
+            // disable button
+            disableButton()
+        }
+    }
     
 }
 
@@ -169,9 +220,7 @@ extension NewTaskViewController: UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.taskViewModel.setSelectedIndex(to: indexPath.item)
         self.collectionView.reloadSections(IndexSet(0..<1))
+        checkButtonStatus()
     }
-    
-    
-    
     
 }
