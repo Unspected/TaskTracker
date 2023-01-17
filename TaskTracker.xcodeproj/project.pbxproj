@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E92B059529724D9600F530AA /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E92B059729724D9600F530AA /* Montserrat-LightItalic.ttf */; };
+		E96C67CE2976250C00CB464E /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96C67CD2976250C00CB464E /* TimerViewController.swift */; };
 		E980FE4529722CF400EB1EAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980FE4429722CF400EB1EAC /* AppDelegate.swift */; };
 		E980FE4729722CF400EB1EAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980FE4629722CF400EB1EAC /* SceneDelegate.swift */; };
 		E980FE4929722CF400EB1EAC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980FE4829722CF400EB1EAC /* MainViewController.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		E92B059629724D9600F530AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
+		E96C67CD2976250C00CB464E /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		E980FE4129722CF400EB1EAC /* TaskTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E980FE4429722CF400EB1EAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E980FE4629722CF400EB1EAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				E980FE8329723ECF00EB1EAC /* Cells */,
 				E980FE4829722CF400EB1EAC /* MainViewController.swift */,
 				E980FE87297243AD00EB1EAC /* NewTaskViewController.swift */,
+				E96C67CD2976250C00CB464E /* TimerViewController.swift */,
 				E980FE4A29722CF400EB1EAC /* Main.storyboard */,
 			);
 			path = Main;
@@ -327,6 +330,7 @@
 				E980FE4529722CF400EB1EAC /* AppDelegate.swift in Sources */,
 				E980FE4729722CF400EB1EAC /* SceneDelegate.swift in Sources */,
 				E980FE4F29722CF400EB1EAC /* TaskTracker.xcdatamodeld in Sources */,
+				E96C67CE2976250C00CB464E /* TimerViewController.swift in Sources */,
 				E980FE8229723A9300EB1EAC /* Task.swift in Sources */,
 				E980FE802972389200EB1EAC /* Constants.swift in Sources */,
 			);
