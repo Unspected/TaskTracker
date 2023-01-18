@@ -54,7 +54,7 @@ class TimerViewController: UIViewController {
         return strokeEnd
     }()
     
-    lazy var timeResetAnimation: CABasicAnimation = {
+    lazy var timerResetAnimation: CABasicAnimation = {
         let strokeEnd = CABasicAnimation(keyPath: "strokeEnd")
         strokeEnd.toValue = 1
         strokeEnd.duration = 1
@@ -66,8 +66,7 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let task = taskViewModel.getTask()
-        let task = Task(taskName: "YT-3", taskDescription: "test", seconds: 60, taskType: .init(symbolName: "iphone", typeName: "Develop"), timeStemp: Date().timeIntervalSince1970)
+        let task = taskViewModel.getTask()
         self.totalSeconds = task.seconds
         self.taskTitleLabel.text = task.taskName
         self.descriptionLabel.text = task.taskDescription
@@ -86,6 +85,9 @@ class TimerViewController: UIViewController {
         timerView.transform = timerView.transform.rotated(by: 270.degreeToRadiance())
         timerLabel.transform = timerLabel.transform.rotated(by: 90.degreeToRadiance())
         timerContainerView.transform = timerContainerView.transform.rotated(by: 90.degreeToRadiance())
+        
+        updateLabels()
+        addCircles()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,11 +119,34 @@ class TimerViewController: UIViewController {
     
     
     @IBAction func pauseResumeButtonPressed(_ sender: UIButton) {
-        
+        switch timerState {
+            case .running:
+                self.timerState = .paused
+                self.timerCircleFillLayer.strokeEnd = CGFloat(timerSeconds) / CGFloat(totalSeconds)
+                self.resetTimer()
+                animatePauseButton(symbolName: "play.fill")
+            case .paused:
+                self.timerState = .running
+                self.timerEndAnimation.duration = Double(self.timerSeconds) + 1
+                self.startTimer()
+                
+                animatePauseButton(symbolName: "pause.fill")
+             
+            default: break
+        }
     }
     
-    @IBAction func resetButtonPressed(_ sender: UIButton) {
+    @IBAction func resetButtonPressed(_ sender: Any) {
+        self.timerState = .suspended
+        self.timerSeconds = self.totalSeconds
+        resetTimer()
+        
+        self.timerCircleFillLayer.add(timerResetAnimation, forKey: "reset")
+        animatePauseButton(symbolName: "play.fill")
+        animatePlayPauseResetViews(timerPlaying: true)
     }
+    
+
     
     
     //MARK: - functions
@@ -166,6 +191,11 @@ class TimerViewController: UIViewController {
             self.timerSeconds -= 1
             self.updateLabels()
             if (self.timerSeconds == 0) {
+                timer.invalidate()
+                self.resetButtonPressed(self)
+                self.timerState = .suspended
+                self.animatePlayPauseResetViews(timerPlaying: true)
+                self.timerSeconds = self.totalSeconds
                 self.resetTimer()
             }
         }
@@ -209,6 +239,7 @@ class TimerViewController: UIViewController {
     func resetTimer() {
         self.countDownTimer.invalidate()
         self.timerCircleFillLayer.removeAllAnimations()
+        self.updateLabels()
     }
     
     func animatePauseButton(symbolName: String) {
@@ -228,6 +259,31 @@ class TimerViewController: UIViewController {
                 view.isUserInteractionEnabled = timerPlaying ? false : true
             }
         }
+    }
+    
+    func addCircles() {
+        let circle = CAShapeLayer()
+        circle.path = UIBezierPath(arcCenter: CGPoint(x: 0, y: self.view.frame.height - 140),
+                                   radius: 120,
+                                   startAngle: 0,
+                                   endAngle: 360.degreeToRadiance(),
+                                   clockwise: true).cgPath
+        circle.fillColor = UIColor(hex: "F6A63A").cgColor
+        circle.opacity = 0.15
+        
+        let circleTwo = CAShapeLayer()
+        circleTwo.path = UIBezierPath(arcCenter: CGPoint(x: 80, y: self.view.frame.height - 60),
+                                   radius: 110,
+                                   startAngle: 0,
+                                   endAngle: 360.degreeToRadiance(),
+                                   clockwise: true).cgPath
+        circleTwo.fillColor = UIColor(hex: "F6A63A").cgColor
+        circleTwo.opacity = 0.35
+        
+        self.view.layer.insertSublayer(circle, above: self.view.layer)
+        self.view.layer.insertSublayer(circleTwo, above: self.view.layer)
+        
+        self.view.bringSubviewToFront(descriptionLabel)
     }
     
     
