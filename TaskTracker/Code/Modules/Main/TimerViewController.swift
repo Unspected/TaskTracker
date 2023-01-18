@@ -38,7 +38,7 @@ class TimerViewController: UIViewController {
     }
     
     let timerAttributes = [NSAttributedString.Key.font: UIFont(name: "Code-Pro-Bold-LC", size: 46)!, .foregroundColor: UIColor.black]
-    let semiBoldAttributes = [NSAttributedString.Key.font: UIFont(name: "Code-Pro-Bold-LC", size: 32)!, .foregroundColor: UIColor.black]
+    let semiBoldAttributes = [NSAttributedString.Key.font: UIFont(name: "Code-Pro-LC", size: 32)!, .foregroundColor: UIColor.black]
     
     let timerTrackLayer = CAShapeLayer()
     let timerCircleFillLayer = CAShapeLayer()
@@ -181,9 +181,9 @@ class TimerViewController: UIViewController {
         if hours > 0 {
             let hoursCount = String(hours).count
             let minutesCount = String(minutes).count
-            let secondsCount = String(seconds.appendZeroes()).count
+            let secondsCount = String(seconds).count
             
-            let timerString = "\(hours)h \(minutes)m \(seconds.appendZeroes())s"
+            let timerString = "\(hours)h  \(minutes)m  \(seconds.appendZeroes())s"
             let attributedString = NSMutableAttributedString(string: timerString, attributes: semiBoldAttributes)
             
             attributedString.addAttributes(timerAttributes, range: NSRange(location: 0, length: hoursCount))
@@ -196,7 +196,7 @@ class TimerViewController: UIViewController {
             let minutesCount = String(minutes).count
             let secondsCount = String(seconds.appendZeroes()).count
             
-            let timerString = "\(minutes)m \(seconds.appendZeroes())s"
+            let timerString = "\(minutes)m  \(seconds.appendZeroes())s"
             let attributedString = NSMutableAttributedString(string: timerString, attributes: semiBoldAttributes)
             
             attributedString.addAttributes(timerAttributes, range: NSRange(location: 0, length: minutesCount))
